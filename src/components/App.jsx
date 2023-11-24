@@ -9,31 +9,13 @@ import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
-    contacts: JSON.parse(localStorage.getItem('contacts')) || [],
+    contacts: [],
     filter: '',
   };
 
   componentDidMount() {
-    if (!Boolean(localStorage.getItem('counter'))) {
-      localStorage.setItem('counter', '0');
-    }
-
-    if (Number(localStorage.getItem('counter')) === 0) {
-      this.setSampleContacts();
-      localStorage.setItem('counter', '1');
-    }
-  }
-
-  setSampleContacts() {
-    const sampleContacts = [
-      { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
-      { id: nanoid(), name: 'Hermione Kline', number: '443-89-12' },
-      { id: nanoid(), name: 'Eden Clements', number: '645-17-79' },
-      { id: nanoid(), name: 'Annie Copeland', number: '227-91-26' },
-    ];
-
-    this.setState({ contacts: sampleContacts });
-    localStorage.setItem('contacts', JSON.stringify(sampleContacts));
+    const savedContacts = JSON.parse(localStorage.getItem('contacts'));
+    this.setState({ contacts: savedContacts });
   }
 
   componentDidUpdate(prevProps, prevState) {
